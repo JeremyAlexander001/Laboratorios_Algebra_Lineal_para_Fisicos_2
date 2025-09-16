@@ -6,7 +6,11 @@ warnings.filterwarnings("ignore")
 
 #primeras 5 lineas, con condiciones del profesor
 
-print ("Hola Mundo")
+from numpy import zeros
+datos = zeros([8,2], float)
+from numpy import loadtxt
+datos= loadtxt("data.txt", float)
+print(datos)
 
-x=sin(2*pi)
-print (x)
+#iniciamos con los datos, extraidos del archivo data.txt
+
