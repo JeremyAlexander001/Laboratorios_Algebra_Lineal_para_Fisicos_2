@@ -95,25 +95,6 @@ def lagrange_interpol(x, X, Y):
     for i in range(n):
         P += Y[i] * lagrange_basis(x, i, X)
     return P
-def obtener_coeficientes_lagrange(T, C):
-    n = len(T)
-    coef_resultado = np.zeros(n)
-    
-    for i in range(n):
-        # Inicializar el polinomio base L_i(x) como [1.0]
-        coef_Li = np.array([1.0])
-        
-        for j in range(n):
-            if j != i:
-                # Multiplicar por (x - T[j]) / (T[i] - T[j])
-                denominador = T[i] - T[j]
-                nuevo_factor = np.array([-T[j], 1.0]) / denominador
-                coef_Li = np.convolve(coef_Li, nuevo_factor)
-        
-        # Sumar C[i] * L_i(x) al polinomio total
-        coef_resultado += C[i] * coef_Li
-
-    return coef_resultado
 
 
 # ---- Monomios ----
@@ -147,13 +128,7 @@ for fila in A_Newton:
     print("]")
 
 ## ---LAGRANGE---
-# Calcular coeficientes del polinomio de Lagrange
-coef_lagrange = obtener_coeficientes_lagrange(T, C)
 
-# Mostrar los coeficientes
-print("\nCoeficientes del polinomio interpolante (Lagrange, base monomial):")
-for i, c in enumerate(coef_lagrange):
-    print(f"a_{i} = {c:.6e}")
 
 
 
